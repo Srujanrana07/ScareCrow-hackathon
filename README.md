@@ -12,8 +12,6 @@ This project aims to assist farmers in detecting paddy crop pests and receiving 
 ---
 
 ## 🔍 Features
-
-- **Real-time Pest Detection:** Capture images via a camera feed for immediate pest classification.
 - **Deep Learning Model:** A CNN trained on a diverse dataset of paddy crop pests.
 - **Crop Recommendations:** Provides suitable recommendations for pest control and alternative crops.
 - **Cloud Integration:** Google Cloud Storage for model hosting and easy access.
