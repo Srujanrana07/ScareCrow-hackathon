@@ -36,7 +36,7 @@
             border-radius: 5px;
             width: 100%;
         }
-        .submit-btn {
+        .submit-btn, .redirect-btn {
             margin-top: 15px;
             padding: 10px;
             background: #007bff;
@@ -55,7 +55,7 @@
             background: #28a745;
             color: white;
             border-radius: 5px;
-            display: none; /* Initially hidden */
+            display: none;
         }
     </style>
 </head>
@@ -71,6 +71,7 @@
             <input type="text" id="input6" placeholder="pH Level">
             <input type="text" id="input7" placeholder="Rainfall">
             <button class="submit-btn" onclick="submitData()">Predict Crop</button>
+            <button class="redirect-btn" onclick="redirectToIndex2()">Go to Index2</button>
         </div>
         <div class="output-section">
             <div id="output" class="output-box"></div>
@@ -106,22 +107,22 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRFToken": getCSRFToken()  // CSRF token for security
+                    "X-CSRFToken": getCSRFToken()
                 },
                 body: JSON.stringify(values)
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Response from backend:", data); // Debugging line
+                console.log("Response from backend:", data);
                 
                 if (data.result) {
                     document.getElementById("output").innerText = "Predicted Crop: " + data.result;
-                    document.getElementById("output").style.backgroundColor = "#28a745"; // Green for success
+                    document.getElementById("output").style.backgroundColor = "#28a745";
                 } else {
                     document.getElementById("output").innerText = "Error: " + data.error;
-                    document.getElementById("output").style.backgroundColor = "red"; // Red for error
+                    document.getElementById("output").style.backgroundColor = "red";
                 }
-                document.getElementById("output").style.display = "block"; // Show output
+                document.getElementById("output").style.display = "block";
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -129,6 +130,10 @@
                 document.getElementById("output").style.display = "block";
                 document.getElementById("output").style.backgroundColor = "red";
             });
+        }
+
+        function redirectToIndex2() {
+            window.location.href = "/index2/";
         }
     </script>
 

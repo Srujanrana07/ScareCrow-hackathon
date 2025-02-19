@@ -3,21 +3,11 @@ import numpy as np
 import cv2
 
 # Load your trained model
-model = joblib.load('model.joblib')
+model = joblib.load(r'disease_detector/models/paddy_image_classifier.joblib')
 
-# Provide the image file path
-image_file = "data/paddy_downy_mildew/100017.jpg"
-def predict_disease(image_file):
-    
-# Read the image from the file
-    img = cv2.imread(image_file)
-
-    # Check if the image was loaded properly
-    if img is None:
-        raise FileNotFoundError(f"Could not load image from {image_file}")
-
+def predict_disease(image):
     # Resize the image to match model input size
-    img_resized = cv2.resize(img, (224, 224))  # Adjust size as per your model requirements
+    img_resized = cv2.resize(image, (224, 224))  # Adjust size as per your model requirements
     img_array = np.expand_dims(img_resized, axis=0)
 
     # Predict the disease
@@ -38,6 +28,4 @@ def predict_disease(image_file):
         9: 'paddy_tungro'
     }
 
-    disease_name = disease_dict.get(disease_class, "Unknown")
-    print(f"Predicted Disease: {disease_name}")
-    return disease_name
+    return disease_dict.get(disease_class, "Unknown")
