@@ -7,8 +7,8 @@ A web-based application to detect paddy crop deaease and recommend suitable crop
 
 This project aims to assist farmers in detecting paddy crop pests and receiving tailored crop management recommendations. By utilizing a Convolutional Neural Network (CNN), the system identifies pests from captured images and classifies them into different categories. Additionally, the system provides recommendations on pest control measures and alternative crop strategies. The trained model is deployed using Flask and stored on Google Cloud Storage for scalability. The web application offers an intuitive user interface, allowing users to capture images using a real-time camera feed for instant analysis and feedback.
 ---
-![moodelling](https://github.com/user-attachments/assets/741b00f5-facc-4cb5-8538-d2444da3b713)
 
+![image](https://github.com/user-attachments/assets/3da53b46-8706-4465-ad0c-967ea6da45f9)
 ---
 
 ## 🔍 Features
@@ -105,7 +105,7 @@ Directory structure:
     └── templates/
         └── index.html
 ```
-![image](https://github.com/user-attachments/assets/3da53b46-8706-4465-ad0c-967ea6da45f9)
+![moodelling](https://github.com/user-attachments/assets/741b00f5-facc-4cb5-8538-d2444da3b713)
 ---
 
 
