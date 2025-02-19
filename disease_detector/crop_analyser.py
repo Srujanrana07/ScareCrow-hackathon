@@ -54,3 +54,11 @@ def predict_crop(model, label_encoder, N, P, K, temperature, humidity, ph, rainf
 # Example usage after defining the function
 predicted_crop = predict_crop(model, label_encoder, 69, 55, 38, 22.7, 82.6, 5.7, 271.3)
 print("Predicted Crop:", predicted_crop)
+
+def fun_call(N, P, K, temperature, humidity, ph, rainfall):
+    predicted_crop = predict_crop(model, label_encoder, N, P, K, temperature, humidity, ph, rainfall)
+    return predicted_crop
+    # print("Function called successfully!")
+    # print("Predicted Crop:", predicted_crop)
+
+    

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 50%;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .submit-btn {
+            margin-top: 15px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .output-section {
+            width: 50%;
+            text-align: center;
+        }
+        .output-box {
+            margin-top: 20px;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="input-section">
+            <input type="text" id="input1" placeholder="Nitrogen (N)">
+            <input type="text" id="input2" placeholder="Phosphorus (P)">
+            <input type="text" id="input3" placeholder="Potassium (K)">
+            <input type="text" id="input4" placeholder="Temperature">
+            <input type="text" id="input5" placeholder="Humidity">
+            <input type="text" id="input6" placeholder="pH Level">
+            <input type="text" id="input7" placeholder="Rainfall">
+            <button class="submit-btn" onclick="submitData()">Predict Crop</button>
+        </div>
+        <div class="output-section">
+            <div id="output" class="output-box"></div>
+        </div>
+    </div>
+
+    <script>
+        function getCSRFToken() {
+            let cookieValue = null;
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.startsWith("csrftoken=")) {
+                    cookieValue = cookie.substring("csrftoken=".length, cookie.length);
+                    break;
+                }
+            }
+            return cookieValue;
+        }
+
+        function submitData() {
+            let values = {
+                N: document.getElementById("input1").value,
+                P: document.getElementById("input2").value,
+                K: document.getElementById("input3").value,
+                temperature: document.getElementById("input4").value,
+                humidity: document.getElementById("input5").value,
+                ph: document.getElementById("input6").value,
+                rainfall: document.getElementById("input7").value
+            };
+
+            fetch("/predict_crop/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCSRFToken()  // CSRF token for security
+                },
+                body: JSON.stringify(values)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response from backend:", data); // Debugging line
+                
+                if (data.result) {
+                    document.getElementById("output").innerText = "Predicted Crop: " + data.result;
+                    document.getElementById("output").style.backgroundColor = "#28a745"; // Green for success
+                } else {
+                    document.getElementById("output").innerText = "Error: " + data.error;
+                    document.getElementById("output").style.backgroundColor = "red"; // Red for error
+                }
+                document.getElementById("output").style.display = "block"; // Show output
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("output").innerText = "Error fetching data!";
+                document.getElementById("output").style.display = "block";
+                document.getElementById("output").style.backgroundColor = "red";
+            });
+        }
+    </script>
+
+</body>
+</html>
