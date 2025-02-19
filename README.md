@@ -9,6 +9,7 @@ This project aims to assist farmers in detecting paddy crop pests and receiving 
 ---
 
 ![image](https://github.com/user-attachments/assets/3da53b46-8706-4465-ad0c-967ea6da45f9)
+![moodelling](https://github.com/user-attachments/assets/741b00f5-facc-4cb5-8538-d2444da3b713)
 ---
 
 ## 🔍 Features
@@ -103,7 +104,7 @@ Directory structure:
     └── templates/
         └── index.html
 ```
-![moodelling](https://github.com/user-attachments/assets/741b00f5-facc-4cb5-8538-d2444da3b713)
+
 ---
 
 
