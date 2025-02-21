@@ -1,9 +1,13 @@
 import joblib
 import numpy as np
 import cv2
+import os
 
-# Load your trained model
-model = joblib.load(r'disease_detector/models/paddy_image_classifier.joblib')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Adjust if needed
+
+# Load the saved model
+model_path = os.path.join(BASE_DIR, 'disease_detector', 'models', 'paddy_image_classifier.joblib')
+model = joblib.load(model_path)
 
 def predict_disease(image):
     # Resize the image to match model input size

@@ -1,13 +1,18 @@
 import joblib
 import pandas as pd
+import os
 
 print("Loading the model and encoder...")
 
-# Load the saved model
-model = joblib.load(r'disease_detector\models\crop_recommendation_model.pkl')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Adjust if needed
 
-# Load the label encoder (assuming you saved it during training)
-label_encoder = joblib.load(r'disease_detector\models\label_encoder.pkl')
+# Load the saved model
+model_path = os.path.join(BASE_DIR, 'disease_detector', 'models', 'crop_recommendation_model.pkl')
+model = joblib.load(model_path)
+
+# Load the label encoder 
+label_encoder_path=os.path.join(BASE_DIR, 'disease_detector', 'models', 'label_encoder.pkl')
+label_encoder = joblib.load(label_encoder_path)
 
 print("Model and encoder loaded successfully!")
 
