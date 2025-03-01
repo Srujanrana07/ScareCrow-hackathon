@@ -2,12 +2,6 @@ import os
 import joblib
 import numpy as np
 import cv2
-# from django.shortcuts import render
-# from django.http import JsonResponse
-# from django.conf import settings
-# from django.views.decorators.csrf import csrf_exempt
-# from dotenv import load_dotenv
-# import google.generativeai as genai
 from .LLM_model import get_gemini_response
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,34 +40,3 @@ def predict_disease(image):
 
     return disease_name, gemini_response
 
-#     chat_session = gemini_model.start_chat(
-#         history=[]
-#     )
-
-#     response = chat_session.send_message(f"What is the cure for {disease_dict.get(disease_class, 'Unknown')}?")
-#     if response:
-#         return disease_dict.get(disease_class, "Unknown"), response.text
-#     else:
-#         return "Unknown", "Cure information not available."
-
-# # View for handling disease prediction without using forms
-# @csrf_exempt
-# def predict_disease_view(request):
-#     if request.method == 'POST' and request.FILES.get('image'):
-#         # Get the image from the request
-#         uploaded_file = request.FILES['image']
-        
-#         # Convert the file to a numpy array for OpenCV
-#         img_array = np.frombuffer(uploaded_file.read(), np.uint8)
-#         image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-
-#         # Call the prediction function
-#         disease, cure = predict_disease(image)
-
-#         # Return the disease and the cure response
-#         return JsonResponse({
-#             "disease": disease,
-#             "cure": cure
-#         })
-    
-#     return JsonResponse({"error": "Invalid request. Please upload an image."}, status=400)
