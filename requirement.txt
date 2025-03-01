@@ -19,3 +19,6 @@ matplotlib
 opencv-python
 joblib
 scikit-learn
+google-generativeai 
+python-dotenv 
+pillow

@@ -52,11 +52,11 @@ def detect_disease(request):
             return JsonResponse({"error": "Invalid image file"}, status=400)
 
         # Predict disease
-        disease_name = predict_disease(image)
+        disease_name, gemini_response = predict_disease(image)
 
         # Extract crop name (assuming "paddy" as default, modify logic as needed)
         crop_name = "Paddy" if "paddy" in disease_name else "Unknown"
-
-        return JsonResponse({"crop": crop_name, "disease": disease_name})
+        
+        return JsonResponse({"crop": crop_name, "disease": disease_name, "cure": gemini_response})
 
     return JsonResponse({"error": "Invalid request"}, status=400)

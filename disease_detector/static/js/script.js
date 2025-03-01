@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultsSection = document.getElementById('resultsSection');
     const cropNameElement = document.getElementById('cropName');
     const diseaseElement = document.getElementById('disease');
+    const cureElement = document.getElementById('cure');
 
     function getCSRFToken() {
         let cookieValue = null;
@@ -94,9 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.error) {
                 cropNameElement.textContent = "Error";
                 diseaseElement.textContent = data.error;
+                cureElement.textContent = "";
             } else {
                 cropNameElement.textContent = data.crop;
                 diseaseElement.textContent = data.disease;
+                cureElement.textContent = data.cure;
             }
             loadingIndicator.hidden = true;
             resultsSection.hidden = false;
@@ -105,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error("Error:", error);
             cropNameElement.textContent = "Error";
             diseaseElement.textContent = "Failed to analyze image.";
+            cureElement.textContent = "";
             resultsSection.hidden = false;
         })
         .finally(() => {
