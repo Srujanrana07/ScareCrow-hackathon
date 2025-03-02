@@ -1,3 +1,4 @@
+#disease_detector\image_classifier_code.py
 import os
 import joblib
 import numpy as np
@@ -12,15 +13,14 @@ model = joblib.load(model_path)
 
 
 # Helper function to predict disease
-def predict_disease(image):
-    img_resized = cv2.resize(image, (224, 224))  
+def predict_disease(image, request):
+    img_resized = cv2.resize(image, (224, 224))
     img_array = np.expand_dims(img_resized, axis=0)
 
     # Predict the disease
     prediction = model.predict(img_array)
-    disease_class = np.argmax(prediction, axis=1)[0] 
+    disease_class = np.argmax(prediction, axis=1)[0]
 
-    # Map the disease_class to a specific disease
     disease_dict = {
         0: 'paddy_bacterial_leaf_blight',
         1: 'paddy_bacterial_leaf_streak',
@@ -36,7 +36,9 @@ def predict_disease(image):
 
     disease_name = disease_dict.get(disease_class, "Unknown")
 
-    gemini_response = get_gemini_response(disease_name)
+    # Call Gemini API 🔥
+    gemini_response = get_gemini_response(disease_name, request)
 
     return disease_name, gemini_response
+
 

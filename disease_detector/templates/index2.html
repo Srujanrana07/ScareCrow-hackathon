@@ -1,44 +1,57 @@
+{% comment %} disease_detector\templates\index2.html {% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crop Disease Analyzer</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
-  </head>
-  <body>
-    <div class="container">
-      <div class="upload-card">
-        <h1>Crop Disease Analyzer</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Disease Analyzer</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+<div class="container">
+  <div class="upload-card">
+    <h1>Crop Disease Analyzer</h1>
 
-        <div class="upload-area" id="dropZone">
-          <input type="file" id="fileInput" accept="image/*" hidden />
-          <div class="upload-content">
-            <img src="{% static 'img/up-loading.png' %}" alt="Upload" id="uploadIcon" />
-            <p>Drag and drop your image here or</p>
-            <button id="uploadButton">Choose File</button>
-          </div>
-        </div>
+    <div class="upload-area" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*" hidden />
+      <div class="upload-content">
+        <img src="{% static 'img/up-loading.png' %}" alt="Upload" id="uploadIcon" />
+        <p>Drag and drop your image here or</p>
+        <button id="uploadButton">Choose File</button>
+      </div>
+    </div>
 
-        <div class="preview-section" id="previewSection" hidden>
-          <h2>Selected Image:</h2>
-          <img id="imagePreview" alt="Preview" />
+    <div class="preview-section" id="previewSection" hidden>
+      <h2>Selected Image:</h2>
+      <img id="imagePreview" alt="Preview" />
 
-          <div class="loading" id="loadingIndicator" hidden>
-            <div class="spinner"></div>
-            <p>Analyzing image...</p>
-          </div>
+      <div class="loading" id="loadingIndicator" hidden>
+        <div class="spinner"></div>
+        <p>Analyzing image...</p>
+      </div>
 
-          <div class="results" id="resultsSection" hidden>
-            <h2>Analysis Results:</h2>
-            <p><strong>Crop Name:</strong> <span id="cropName"></span></p>
-            <p><strong>Disease:</strong> <span id="disease"></span></p>
-            <p><strong>Cure:</strong> <span id="cure"></span></p>
+      <div class="results" id="resultsSection" hidden>
+        <h2>Analysis Results:</h2>
+        <p><strong>Crop Name:</strong> <span id="cropName"></span></p>
+        <p><strong>Disease:</strong> <span id="disease"></span></p>
+        <p><strong>Cure:</strong> <span id="cure"></span></p>
+      </div>
+
+      <!-- Chatbot Section -->
+      <div class="chatbot-section" id="chatbotSection" hidden>
+        <h2>Chat with Scarecrow</h2>
+        <div class="chat-box">
+          <div class="messages" id="messages"></div>
+          <div class="input-box">
+            <input type="text" id="userMessage" placeholder="Ask something..." />
+            <button onclick="sendMessage()">Send</button>
           </div>
         </div>
       </div>
     </div>
-    <script src="{% static 'js/script.js' %}"></script>
-  </body>
+  </div>
+</div>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
 </html>

@@ -1,3 +1,4 @@
+# scarecrowApp\settings.py
 import os
 """
 Django settings for scarecrowApp project.
@@ -127,3 +128,9 @@ INSTALLED_APPS += ['disease_detector']
 TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'templates')]
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Enable Session Storage in DB
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 3600  # Session Expiration (1 Hour)
+SESSION_SAVE_EVERY_REQUEST = True  # Save session every request
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Session remains until expiration

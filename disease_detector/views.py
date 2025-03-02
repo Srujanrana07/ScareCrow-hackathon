@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import json
 from .crop_analyser import fun_call  # Import the function
 from .image_classifier_code import predict_disease
+from .LLM_model import get_chatbot_response, get_gemini_response
 from django.views.decorators.csrf import csrf_exempt
 import numpy as np
 import cv2
@@ -41,7 +42,7 @@ def index2(request):
     return render(request, 'index2.html')
 
 
-@csrf_exempt  # Only for development; use proper CSRF handling in production
+@csrf_exempt
 def detect_disease(request):
     if request.method == "POST" and request.FILES.get("image"):
         image_file = request.FILES["image"].read()
@@ -51,12 +52,47 @@ def detect_disease(request):
         if image is None:
             return JsonResponse({"error": "Invalid image file"}, status=400)
 
-        # Predict disease
-        disease_name, gemini_response = predict_disease(image)
+        # Predict disease + Gemini API Call
+        disease_name, gemini_response = predict_disease(image, request)
 
-        # Extract crop name (assuming "paddy" as default, modify logic as needed)
-        crop_name = "Paddy" if "paddy" in disease_name else "Unknown"
-        
-        return JsonResponse({"crop": crop_name, "disease": disease_name, "cure": gemini_response})
+        crop_name = "Paddy" if "paddy" in disease_name.lower() else "Unknown"
+
+        # Store cure in session
+        request.session["current_cure"] = gemini_response
+        request.session["current_disease"] = disease_name
+
+        return JsonResponse({
+            "crop": crop_name,
+            "disease": disease_name,
+            "cure": gemini_response
+        })
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+# Add new chatbot endpoint
+@csrf_exempt
+def ask_question(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            question = data.get("question", "")
+            
+            # Retrieve cure information from session
+            cure_text = request.session.get('current_cure', '')
+            disease_name = request.session.get('current_disease', '')
+            
+            if not cure_text:
+                return JsonResponse({"error": "No cure information found. Please analyze an image first."})
+            
+            # Get chatbot response
+            answer = get_chatbot_response(question, request)
+            return JsonResponse({
+                "answer": answer,
+                "disease": disease_name
+            })
+            
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    
+    return JsonResponse({"error": "Invalid request method"}, status=405)

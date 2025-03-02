@@ -1,3 +1,4 @@
+#disease_detector\apps.py
 from django.apps import AppConfig
 
 

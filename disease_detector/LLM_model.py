@@ -1,3 +1,4 @@
+#disease_detector\LLM_model.py
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
@@ -8,13 +9,13 @@ load_dotenv()
 # Configure Gemini API Key
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
-# Helper function to get response from Gemini
-def get_gemini_response(disease_name):
-    try:
-        # Construct the prompt
-        prompt = f"What are its causes? What is the and possible treatments {disease_name}?"
+temp_response = ""
 
-        # Define the generation configuration
+# Helper function to get response from Gemini
+def get_gemini_response(disease_name, request):
+    try:
+        prompt = f"What are its causes? What are the possible treatments for {disease_name}?"
+
         generation_config = {
             "temperature": 1,
             "top_p": 0.95,
@@ -23,24 +24,47 @@ def get_gemini_response(disease_name):
             "response_mime_type": "text/plain",
         }
 
-        # Instantiate the generative model
         gemini_model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",  
+            model_name="gemini-1.5-flash",
             generation_config=generation_config
         )
 
-        chat_session = gemini_model.start_chat(
-            history=[]
-        )
-
-        response = chat_session.send_message(f"What are its causes? What is the and possible treatments {disease_name}?")
+        chat_session = gemini_model.start_chat(history=[])
+        response = chat_session.send_message(prompt)
+        
         if response:
-            return clean_text(response.text, disease_name)
+            cleaned_response = clean_text(response.text, disease_name)
+            request.session["current_cure"] = cleaned_response  # Store in Session 🔥
+            return cleaned_response
         else:
             return "Cure information not available."
-    
+
     except Exception as e:
         return f"Error fetching details from Gemini: {str(e)}"
+
+
+
+def get_chatbot_response(question, request):
+    try:
+        cure_text = request.session.get("current_cure", "")
+
+        if not cure_text:
+            return "No cure information found. Please analyze an image first."
+
+        prompt = f"""
+        Based on this disease information:
+        {cure_text}
+
+        Answer this question: {question}
+        """
+
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        response = model.generate_content(prompt)
+        return response.text
+    
+    except Exception as e:
+        return f"Error processing your question: {str(e)}"
+
 
 def clean_text(text, disease_name):
     """
