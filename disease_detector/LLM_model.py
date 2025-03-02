@@ -33,7 +33,7 @@ def get_gemini_response(disease_name, request):
         response = chat_session.send_message(prompt)
         
         if response:
-            cleaned_response = clean_text(response.text, disease_name)
+            cleaned_response = clean_text(response.text)
             request.session["current_cure"] = cleaned_response  # Store in Session 🔥
             return cleaned_response
         else:
@@ -60,13 +60,13 @@ def get_chatbot_response(question, request):
 
         model = genai.GenerativeModel('gemini-1.5-flash')
         response = model.generate_content(prompt)
-        return response.text
+        return clean_text(response.text)
     
     except Exception as e:
         return f"Error processing your question: {str(e)}"
 
 
-def clean_text(text, disease_name):
+def clean_text(text):
     """
     Cleans the Gemini API response by:
     - Removing asterisks (*) and double asterisks (**)
