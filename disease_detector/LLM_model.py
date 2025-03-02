@@ -20,7 +20,7 @@ def get_gemini_response(disease_name, request):
             "temperature": 1,
             "top_p": 0.95,
             "top_k": 64,
-            "max_output_tokens": 512,
+            "max_output_tokens": 1024,
             "response_mime_type": "text/plain",
         }
 
