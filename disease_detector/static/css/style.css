@@ -1,2 +1,135 @@
 /* disease_detector\static\css\style.css */
-body { font-family: Arial, sans-serif; text-align: center; }
+/* disease_detector\static\css\style.css */
+:root {
+    --primary-color: #2E7D32;
+    --secondary-color: #81C784;
+    --background-color: #F8FBF8;
+    --input-border: #C8E6C9;
+    --text-dark: #1B5E20;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 1rem;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.input-group input {
+    padding: 0.8rem;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    background-color: #F8FBF8;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+}
+
+.button-group {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.submit-btn, .redirect-btn {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.submit-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #1B5E20;
+}
+
+.redirect-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--input-border);
+}
+
+.redirect-btn:hover {
+    background: #F8FBF8;
+    border-color: var(--primary-color);
+}
+
+.output-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.output-box {
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    color: var(--text-dark);
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.output-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.output-box.error {
+    background: #FFEBEE;
+    color: #C62828;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+}

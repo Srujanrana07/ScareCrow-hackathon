@@ -9,7 +9,6 @@ load_dotenv()
 # Configure Gemini API Key
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
-temp_response = ""
 
 # Helper function to get response from Gemini
 def get_gemini_response(disease_name, request):
