@@ -106,5 +106,35 @@ Directory structure:
 ```
 
 ---
+## 🤝 **Contributors**  
+We would like to extend our heartfelt gratitude to everyone who contributed to this project. Your hard work and dedication made this possible!  
 
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/125748305?v=4" width="80" height="80" alt="Your Name">
+      <br>
+      <a href="https://github.com/Srujanrana07"><b>Srujan Rana</b></a>
+      <br>
+      🏆 Project Lead, Backend Developer
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/119315259?v=4" width="80" height="80" alt="Contributor 1">
+      <br>
+      <a href="https://github.com/contributor1"><b>Rudra Prasad Jena</b></a>
+      <br>
+      💻 Frontend Developer & 🌐 API Integration
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/139056705?v=4" width="80" height="80" alt="Contributor 1">
+      <br>
+      <a href="https://github.com/Debasish-87"><b>Debasish Mohanti</b></a>
+      <br>
+      💻 Frontend Developer
+    </td>
+  </tr>
+</table>
+
+🌟 **Want to contribute?**  
+We welcome contributions from the community! If you'd like to improve the project or report issues, feel free to fork the repo and submit a pull request.  
 
