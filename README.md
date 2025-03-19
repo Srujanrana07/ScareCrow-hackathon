@@ -128,7 +128,7 @@ We would like to extend our heartfelt gratitude to everyone who contributed to t
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/139056705?v=4" width="80" height="80" alt="Contributor 1">
       <br>
-      <a href="https://github.com/Debasish-87"><b>Debasish Mohanti</b></a>
+      <a href="https://github.com/Debasish-87"><b>Debasish Mohanty</b></a>
       <br>
       💻 Frontend Developer
     </td>
